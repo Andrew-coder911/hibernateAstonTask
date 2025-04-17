@@ -1,0 +1,24 @@
+# Мавен
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Eclipse
+*.project
+*.classpath
+.settings/
+
+# Система операционной системы
+.DS_Store  # macOS
+Thumbs.db  # Windows
+
+# Лог файлы
+*.log
+
+# Конфиденциальные файлы (если используются)
+.env
+
+# Прочее
+*.bak  # Резервные копии
