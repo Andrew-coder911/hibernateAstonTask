@@ -15,28 +15,24 @@
   </properties>
 
   <dependencies>
-    <!-- Hibernate Core -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>5.6.15.Final</version> <!-- стабильная версия -->
     </dependency>
 
-    <!-- PostgreSQL Driver -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>42.6.0</version>
     </dependency>
 
-    <!-- SLF4J for logging -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>1.7.36</version>
     </dependency>
 
-    <!-- Logback (реализация для SLF4J) -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
