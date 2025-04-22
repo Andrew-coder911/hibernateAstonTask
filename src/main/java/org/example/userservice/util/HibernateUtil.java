@@ -10,8 +10,7 @@ public class HibernateUtil {
     private static SessionFactory buildSessionFactory() {
         try {
             Configuration cfg = new Configuration()
-                    .configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(User.class);
+                    .configure("hibernate.cfg.xml");
             return cfg.buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("SessionFactory initialization failed: " + ex);
