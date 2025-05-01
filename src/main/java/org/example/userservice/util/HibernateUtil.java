@@ -1,6 +1,5 @@
 package org.example.userservice.util;
 
-import org.example.userservice.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

@@ -1,11 +1,12 @@
-package org.example.userservice.model;
+package org.example.userservice.dao;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-public class User {
+class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,11 +24,11 @@ public class User {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    public User() {
+    UserEntity() {
         this.createdAt = LocalDateTime.now();
     }
 
-    public User(String name, String email, int age) {
+    UserEntity(String name, String email, int age) {
         this.name = name;
         this.email = email;
         this.age = age;
@@ -83,5 +84,18 @@ public class User {
                 ", age=" + age +
                 ", createdAt=" + createdAt +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity that = (UserEntity) o;
+        return age == that.age && Objects.equals(id, that.id) && Objects.equals(name, that.name)
+                && Objects.equals(email, that.email) && Objects.equals(createdAt, that.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, age, createdAt);
     }
 }
