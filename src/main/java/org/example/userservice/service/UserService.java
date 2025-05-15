@@ -2,23 +2,21 @@ package org.example.userservice.service;
 
 import org.example.userservice.dao.UserDAO;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class UserService {
-    private final UserDAO userDao = new UserDAO();
+
+    private final UserDAO userDao;
+
+    public UserService(UserDAO userDao) {
+        this.userDao = userDao;
+    }
 
     public void createUser(String name, String email, int age) {
         checkSameParams(name, email, age);
 
         UserDTO user = new UserDTO(name, email, age);
         userDao.createUser(user);
-    }
-
-    public void deleteUser(Long id) {
-        if (id != null) {
-            userDao.deleteUser(id);
-        }
     }
 
     public UserDTO readUserById(Long id) {
@@ -30,16 +28,22 @@ public class UserService {
         }
     }
 
-    public List<UserDTO> readAllUsers() {
-        return userDao.readAllUsers();
-    }
-
-    public void updateUser(Long id, String name, String email, int age) {
+    public void updateUserData(Long id, String name, String email, int age) {
         if(id != null) {
             checkSameParams(name, email, age);
             UserDTO userDTO = new UserDTO(id, name, email, age);
-            userDao.updateUser(userDTO);
+            userDao.updateUserData(userDTO);
         }
+    }
+
+    public void deleteUser(Long id) {
+        if (id != null) {
+            userDao.deleteUser(id);
+        }
+    }
+
+    public List<UserDTO> readAllUsers() {
+        return userDao.readAllUsers();
     }
 
     private static void checkSameParams(String name, String email, int age) {

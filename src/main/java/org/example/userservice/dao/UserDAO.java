@@ -5,7 +5,6 @@ import org.example.userservice.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,20 +27,13 @@ public final class UserDAO {
     }
 
     /**
-     * Delete user from DB
+     * return UserDTO object
      * @param id number in table (Primary key)
+     * @return UserDTO object
      */
-    public void deleteUser(Long id) {
-        Transaction transaction = null;
+    public UserDTO readUserById(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.createNativeQuery("DELETE FROM users WHERE id =:id")
-                    .setParameter("id", id)
-                    .executeUpdate();
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            e.printStackTrace();
+            return UserMapper.toDTO(session.get(UserEntity.class, id));
         }
     }
 
@@ -49,7 +41,7 @@ public final class UserDAO {
      * Update information in DB about user
      * @param userDTO object
      */
-    public void updateUser(UserDTO userDTO) {
+    public void updateUserData(UserDTO userDTO) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -67,13 +59,20 @@ public final class UserDAO {
     }
 
     /**
-     * return UserDTO object
+     * Delete user from DB
      * @param id number in table (Primary key)
-     * @return UserDTO object
      */
-    public UserDTO readUserById(Long id) {
+    public void deleteUser(Long id) {
+        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return UserMapper.toDTO(session.get(UserEntity.class, id));
+            transaction = session.beginTransaction();
+            session.createNativeQuery("DELETE FROM users WHERE id =:id")
+                    .setParameter("id", id)
+                    .executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
         }
     }
 
