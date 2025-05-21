@@ -34,6 +34,9 @@ public final class UserDAO {
     public UserDTO readUserById(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return UserMapper.toDTO(session.get(UserEntity.class, id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
