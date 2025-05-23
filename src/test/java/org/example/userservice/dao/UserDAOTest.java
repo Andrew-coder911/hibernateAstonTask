@@ -66,8 +66,8 @@ class UserDAOTest {
 
         // Получаем ID созданного пользователя
         Long userId = userDAO.readAllUsers().get(0).getId();
-
         UserDTO savedUser = userDAO.readUserById(userId);
+
         assertNotNull(savedUser);
         assertEquals("John Doe", savedUser.getName());
         assertEquals("john@example.com", savedUser.getEmail());
@@ -82,8 +82,8 @@ class UserDAOTest {
         Long userID = userDAO.readAllUsers().get(0).getId();
         UserDTO updatedUserDTO = new UserDTO(userID, "NewJohn Doe", "john.new@example.com", 44);
         userDAO.updateUserData(updatedUserDTO);
-
         UserDTO receivedUser = userDAO.readUserById(userID);
+
         assertNotNull(receivedUser, "Пользователь не обновлен.");
         assertEquals(userID, receivedUser.getId(), "Неверный Id пользователя.");
         assertEquals("NewJohn Doe", receivedUser.getName());
@@ -97,9 +97,9 @@ class UserDAOTest {
         userDAO.createUser(userDTO);
 
         Long userId = userDAO.readAllUsers().get(0).getId();
-
         userDAO.deleteUser(userId);
         UserDTO receivedUser = userDAO.readUserById(userId);
+
         assertNull(receivedUser, "Пользователь не удален из БД.");
     }
 }
